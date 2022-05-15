@@ -9,3 +9,19 @@
 * 希望尽量将这个项目做的完善，也算对自己学习java swing的一个交代。
 * 自己实现后，如果效果欠佳，希望继续参考他人的项目，学习提炼为自己的\想法进行完善，直到自己比较满意为止。
 * 2022.05.08
+
+# 问题解决
+## 1.java文件编译和打包为jar文件
+下载了jmp123的文件，是代码源文件，树形解构的代码叶子目录有3个，每个下面都有java源文件，这种情况如何使用\
+javac命令进行打包。以下是3种方法，二和三未测试。
+(1)分别编译
+```shell
+javac -d . jmp123/decoder/*.java
+javac -d . jmp123/demo/*.java
+javac -d . jmp123/output/*.java
+```
+(2)
+`javac -d . jmp123/decoder/*.java jmp123/demo/*.java jmp123/output/*.java`
+
+(3)将所有需要编译的java源文件路径放入一个文本文件，并命名，如1.txt
+`javac -d . @1.txt`
