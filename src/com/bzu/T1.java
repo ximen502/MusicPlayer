@@ -20,7 +20,7 @@ public class T1 {
     public static void main(String[] args) {
         T1 t1 = new T1();
 
-        t1.ui(t1);
+//        t1.ui(t1);
 
 
         // 这个timer在控制台应用中没有任何反映
@@ -39,7 +39,7 @@ public class T1 {
 //
 //        timer.start();
 
-//        t1.lrc();
+        t1.lrc();
 //        t1.play();
 //        t1.playByJmp();
 //        t1.chkFile();
@@ -75,18 +75,23 @@ public class T1 {
             }
         });
     }
-
+    int state = 1;//1 end, 2 playing, 3 pause
     Thread mPlayer = new Thread() {
         @Override
         public void run() {
             super.run();
-            while (true) {
-//                if (miniPlayer.isPaused()) {
-//                    miniPlayer.run();
-//                } else {
-//                    miniPlayer.pause();
-//                }
+            if (state == 1) {
+                miniPlayer.run();
+            } else if(state == 2) {
+                miniPlayer.pause();
+            } else if (state == 3) {
+//                miniPlayer.
             }
+//            if (miniPlayer.isPaused()) {
+//                miniPlayer.run();
+//            } else {
+//                miniPlayer.pause();
+//            }
         }
     };
 
@@ -142,7 +147,7 @@ public class T1 {
             System.out.println("------------------------");
             System.out.printf("    length: %d bytes, %d frames\n", length, frameCount);
             System.out.printf("elapsed time: %d ns (%.9fs, %.2f, fps)\n", t1, t1/1e9, frameCount/(t1/1e9));
-            miniPlayer.run();
+//            miniPlayer.run();
         } catch (IOException e) {
             e.printStackTrace();
         }
