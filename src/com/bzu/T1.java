@@ -20,10 +20,10 @@ public class T1 {
     public static void main(String[] args) {
         T1 t1 = new T1();
 
-//        t1.ui(t1);
+        t1.ui(t1);
 
 
-        // 这个timer在控制台应用中没有任何反映
+        // 这个swing timer在控制台应用中没有任何反映
 //        Timer timer = new Timer(1000, new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
@@ -39,9 +39,9 @@ public class T1 {
 //
 //        timer.start();
 
-        t1.lrc();
+//        t1.lrc();
 //        t1.play();
-//        t1.playByJmp();
+        t1.playByJmp();
 //        t1.chkFile();
     }
 
@@ -69,48 +69,13 @@ public class T1 {
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                System.out.println("-----");
-                playByJmp();
-                mPlayer.start();
+                System.out.println("-----");
+//                playByJmp();
+//                mPlayer.start();
             }
         });
     }
-    int state = 1;//1 end, 2 playing, 3 pause
-    Thread mPlayer = new Thread() {
-        @Override
-        public void run() {
-            super.run();
-            if (state == 1) {
-                miniPlayer.run();
-            } else if(state == 2) {
-                miniPlayer.pause();
-            } else if (state == 3) {
-//                miniPlayer.
-            }
-//            if (miniPlayer.isPaused()) {
-//                miniPlayer.run();
-//            } else {
-//                miniPlayer.pause();
-//            }
-        }
-    };
 
-    private void test() {
-        java.util.Timer timer = new java.util.Timer();
-    }
-
-    private void lrc() {
-        //去除歌词中的时间部分，只保留歌词文字内容
-        String str = FileUtil.readFileSdcard(T1.class.getResource("/xlg.lrc").getPath());
-        JSONObject object = new JSONObject(str);
-        String lyric = object.getJSONObject("lrc").getString("lyric");
-//        System.out.println(lyric);
-        String[] split = lyric.split("\n");
-        for (int i = 0; i < split.length; i++) {
-            System.out.println(split[i]);
-            System.out.println(split[i].replaceFirst("\\[\\d{2}:\\d{2}.\\d{2}\\]", ""));
-        }
-    }
 
     private void play() {
         //使用jl1.0.jar实现播放mp3
@@ -147,14 +112,10 @@ public class T1 {
             System.out.println("------------------------");
             System.out.printf("    length: %d bytes, %d frames\n", length, frameCount);
             System.out.printf("elapsed time: %d ns (%.9fs, %.2f, fps)\n", t1, t1/1e9, frameCount/(t1/1e9));
-//            miniPlayer.run();
+            miniPlayer.run();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void playByThird() {
-
     }
 
     private void chkFile(){
@@ -164,4 +125,20 @@ public class T1 {
         System.out.println(s2);
     }
 
+    private void test() {
+        java.util.Timer timer = new java.util.Timer();
+    }
+
+    private void lrc() {
+        //去除歌词中的时间部分，只保留歌词文字内容
+        String str = FileUtil.readFileSdcard(T1.class.getResource("/xlg.lrc").getPath());
+        JSONObject object = new JSONObject(str);
+        String lyric = object.getJSONObject("lrc").getString("lyric");
+//        System.out.println(lyric);
+        String[] split = lyric.split("\n");
+        for (int i = 0; i < split.length; i++) {
+            System.out.println(split[i]);
+            System.out.println(split[i].replaceFirst("\\[\\d{2}:\\d{2}.\\d{2}\\]", ""));
+        }
+    }
 }
